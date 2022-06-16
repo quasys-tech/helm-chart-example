@@ -1,7 +1,7 @@
 #common controlls
 name: xxxx-envoy-api
 environment: test
-containerPort: 80
+containerPort: "80"
 # --set val=\"1234\"
 containerPort2: "9191"
 registry: harborprdap01.xxxxx.com.tr
@@ -52,9 +52,7 @@ envVar:
 
 service:
   port: 80
-  targetPort: 80
   type: ClusterIP
   port2: 8080
-  targetPort2: 8080
 
 #targetport ile containerportu eşitle
