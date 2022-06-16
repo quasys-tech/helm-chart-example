@@ -1,0 +1,60 @@
+#common controlls
+name: nova-envoy-api
+environment: test
+containerPort: 80
+# --set val=\"1234\"
+containerPort2: "9191"
+registry: harborprdap01.anadoluhayat.com.tr
+
+#deployment controlls
+
+replicas: 1
+resource:
+ requests:
+    cpu: 100m
+    memory: 300Mi
+ limits:
+    cpu: 800m
+    memory: 1200Mi
+
+image:
+ name: novaenvoyapi
+ imagePullSecret: harbor
+ pullPolicy: Always
+ test:
+   repository: test
+   tag: latest
+ uat:
+   repository: uat
+   tag: latest
+ prod:
+   repository: prod
+   tag: latest
+
+envVar:
+  configmap:
+    test:
+      ASPNETCORE_ENVIRONMENT: Development
+      ENVOY_UID: 0
+    uat:
+      ASPNETCORE_ENVIRONMENT: Development
+    prod:
+      ASPNETCORE_ENVIRONMENT: Production
+  secret:
+    test:
+      InsisConnectionString: xxx
+    uat:
+      InsisConnectionString: xxx
+    prod:
+      InsisConnectionString: xxx
+
+#Service Controllers
+
+service:
+  port: 80
+  targetPort: 80
+  type: ClusterIP
+  port2: 8080
+  targetPort2: 8080
+
+#targetport ile containerportu eşitle

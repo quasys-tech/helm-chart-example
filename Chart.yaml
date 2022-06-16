@@ -1,0 +1,4 @@
+apiVersion: v1
+description: A Helm chart for Nova Envoy API
+name: nova-envoy-api
+version: v0.1
